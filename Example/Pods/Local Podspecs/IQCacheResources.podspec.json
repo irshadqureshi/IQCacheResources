@@ -1,0 +1,22 @@
+{
+  "name": "IQCacheResources",
+  "version": "0.1.0",
+  "summary": "A short description of IQCacheResources.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Irshad Ahmed Qureshi/IQCacheResources",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Irshad Ahmed Qureshi": "iqureshi@opstrax.com"
+  },
+  "source": {
+    "git": "https://github.com/Irshad Ahmed Qureshi/IQCacheResources.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "IQCacheResources/Classes/**/*"
+}

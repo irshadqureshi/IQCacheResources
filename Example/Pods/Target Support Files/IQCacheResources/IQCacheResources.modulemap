@@ -1,0 +1,6 @@
+framework module IQCacheResources {
+  umbrella header "IQCacheResources-umbrella.h"
+
+  export *
+  module * { export * }
+}

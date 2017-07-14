@@ -1,0 +1,6 @@
+framework module Pods_IQCacheResources_Tests {
+  umbrella header "Pods-IQCacheResources_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

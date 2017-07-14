@@ -1,0 +1,16 @@
+PODS:
+  - IQCacheResources (0.1.0)
+
+DEPENDENCIES:
+  - IQCacheResources (from `../`)
+
+EXTERNAL SOURCES:
+  IQCacheResources:
+    :path: ../
+
+SPEC CHECKSUMS:
+  IQCacheResources: ae81f0e329454c508adbd23a2adb49796ec78626
+
+PODFILE CHECKSUM: 600f968b6a91603f1c8c5f486ccda8c089078b96
+
+COCOAPODS: 1.2.1
