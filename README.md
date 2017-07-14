@@ -22,7 +22,7 @@ pod "IQCacheResources"
 
 ## Author
 
-Irshad Ahmed Qureshi, iqureshi@opstrax.com
+Irshad Ahmed Qureshi, irshad.ishaq.qureshi@gmail.com
 
 ## License
 
