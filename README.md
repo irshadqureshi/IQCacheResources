@@ -1,6 +1,6 @@
 # IQCacheResources
 
-[![CI Status](http://img.shields.io/travis/Irshad Ahmed Qureshi/IQCacheResources.svg?style=flat)](https://travis-ci.org/Irshad Ahmed Qureshi/IQCacheResources)
+[![CI Status](http://img.shields.io/travis/IrshadAhmedQureshi/IQCacheResources.svg?style=flat)](https://travis-ci.org/IrshadAhmedQureshi/IQCacheResources)
 [![Version](https://img.shields.io/cocoapods/v/IQCacheResources.svg?style=flat)](http://cocoapods.org/pods/IQCacheResources)
 [![License](https://img.shields.io/cocoapods/l/IQCacheResources.svg?style=flat)](http://cocoapods.org/pods/IQCacheResources)
 [![Platform](https://img.shields.io/cocoapods/p/IQCacheResources.svg?style=flat)](http://cocoapods.org/pods/IQCacheResources)
