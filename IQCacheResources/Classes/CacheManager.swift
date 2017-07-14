@@ -11,7 +11,7 @@ import UIKit
 
 public class CacheManager {
     
-    static public let sharedCache = CacheManager() 
+    static public let sharedCache = CacheManager()
     
     let imageCache = NSCache<AnyObject, DiscradableImage>()
     let dataCache = NSCache<AnyObject, DiscardableData>()
@@ -32,9 +32,10 @@ public class CacheManager {
     
     convenience init(){
         
-        self.init(cacheCountLimit: 500,cacheSizeLimit: 500)
+        self.init(cacheCountLimit: 0,cacheSizeLimit: 0)
     }
     
+    // Mark:- Cache Image
     
     public func archiveImage(image: UIImage?, url: String) {
         
@@ -48,6 +49,7 @@ public class CacheManager {
         imageCache.setObject(data, forKey: url as NSString)
     }
     
+    // Mark:- Cache Other Data like Json,Xml,etc
     
     public func archiveAnyData(any: AnyObject?, url: String) {
         
@@ -59,9 +61,10 @@ public class CacheManager {
         
         let data = DiscardableData(data: any! as! Data)
         dataCache.setObject(data, forKey: url as NSString)
-    
+        
     }
     
+    // Mark:- Retrive Data
     
     public func unarchiveData(url: String?) -> Data? {
         
@@ -77,6 +80,7 @@ public class CacheManager {
     }
     
     
+    // Mark:- Retrive Json
     
     public func unarchiveJSON(url: String?) -> [String: AnyObject]? {
         
@@ -91,7 +95,8 @@ public class CacheManager {
         return nil
     }
     
-
+    // Mark:- Retrive Image
+    
     public func unarchiveImage(url: String?) -> UIImage? {
         
         if url == nil || url! == "" {
@@ -105,6 +110,7 @@ public class CacheManager {
         return nil
     }
     
+    // Mark:- Clear Cache
     
     public func clearCache() {
         

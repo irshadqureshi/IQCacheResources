@@ -11,12 +11,12 @@ import UIKit
 
 public class DownloadManager: NSObject {
     
-
+    
     var session: URLSession
     let url: NSURL
     var isCaching: Bool
     
-
+    
     init(url: NSURL, shouldCache: Bool) {
         
         session = URLSession(configuration: URLSessionConfiguration.default)
@@ -32,12 +32,11 @@ public class DownloadManager: NSObject {
         self.init(url: url, shouldCache: true)
     }
     
-
     
     func download(completion: @escaping (_ data: NSData?, _ error : NSError?) -> Void) {
-
+        
         session.dataTask(with: url as URL, completionHandler: { (data, response, error) -> Void in
-
+            
             if (error != nil) {
                 
                 completion(nil, error as NSError?)
@@ -53,6 +52,9 @@ public class DownloadManager: NSObject {
         
     }
     
+    
+    // Mark:- Store function to save the data in cache
+    
     func storeInCache(object: AnyObject){
         
         if self.isCaching {
@@ -62,9 +64,42 @@ public class DownloadManager: NSObject {
     }
     
     
+    // Mark:- Check if image exsist in cache or not. If not then download it from server.
+    
+    public func getImage(completion: @escaping (_ url: NSURL, _ image: UIImage?, _ error : NSError?) -> Void) {
+        
+        if let cachedImage = CacheManager.sharedCache.unarchiveImage(url: self.url.absoluteString!) {
+            
+            DispatchQueue.main.async() {
+                
+                completion(self.url, cachedImage, nil)
+            }
+            return
+            
+        } else {
+            
+            download{ (data, error) -> Void in
+                
+                DispatchQueue.main.async() {
+                    
+                    if let thisData = data, let currentImage = UIImage(data: thisData as Data) {
+                        
+                        self.storeInCache(object: currentImage)
+                        
+                        completion(self.url, currentImage, nil)
+                        
+                    } else {
+                        
+                        completion(self.url, nil,  error as NSError?)
+                    }
+                }
+            }
+        }
+    }
     
     
-
+    // Mark:- Check if data exsist in cache or not. If not then download it from server.
+    
     public func getData(completion: @escaping (_ url: NSURL, _ data: NSData?, _ error : NSError?) -> Void) {
         
         self.download{ (data, error) -> Void in
@@ -81,45 +116,13 @@ public class DownloadManager: NSObject {
         }
     }
     
+    // Mark:- Check if json exsist in cache or not. If not then download it from server.
     
-    
-    public func getImage(completion: @escaping (_ url: NSURL, _ image: UIImage?, _ error : NSError?) -> Void) {
-
-        if let cachedImage = CacheManager.sharedCache.unarchiveImage(url: self.url.absoluteString!) {
-            
-            DispatchQueue.main.async() {
-                
-                completion(self.url, cachedImage, nil)
-            }
-            return
-        }
-        else{
-            
-            download{ (data, error) -> Void in
-                
-                DispatchQueue.main.async() {
-                    
-                    if let thisData = data, let currentImage = UIImage(data: thisData as Data) {
-                        
-                        self.storeInCache(object: currentImage)
-                        
-                        completion(self.url, currentImage, nil)
-                        
-                    } else {
-                        
-                        completion(self.url, nil,  NSError(domain: "BeanError", code: -8000, userInfo: nil))
-                    }
-                }
-            }
-        }
-    }
-    
-    //For getting the JSON objects
     public func getJSON(completion: @escaping (_ url: NSURL, _ json: [String: AnyObject]?, _ error : NSError?) -> Void) {
         
         if let cachedJson = CacheManager.sharedCache.unarchiveJSON(url: self.url.absoluteString!) {
             
-            //Returns Cached JSON
+            
             DispatchQueue.main.async() {
                 
                 completion(self.url, cachedJson, nil)
@@ -129,7 +132,7 @@ public class DownloadManager: NSObject {
             
             download{ (data, error) -> Void in
                 do{
-                    //Converts data into JSON by serialization
+                    
                     if let thisData = data, let json = try JSONSerialization.jsonObject(with: thisData as Data, options:.allowFragments) as? [String: AnyObject] {
                         
                         self.storeInCache(object: json as AnyObject)
@@ -149,6 +152,9 @@ public class DownloadManager: NSObject {
         }
     }
     
+    
+    // Mark:- Cancel all task.
+    
     public func cancel(url: NSURL){
         
         session.getTasksWithCompletionHandler { (dataTasks, uploadTasks, downloadTasks) -> Void in
@@ -165,7 +171,6 @@ public class DownloadManager: NSObject {
             }
         }
     }
-    
     
 }
 
