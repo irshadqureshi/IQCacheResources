@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'IQCacheResources_Example' do
+  pod 'IQCacheResources', :path => '../'
+
+  target 'IQCacheResources_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
