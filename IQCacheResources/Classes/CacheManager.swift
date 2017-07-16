@@ -18,7 +18,7 @@ public class CacheManager {
     let jsonCache = NSCache<AnyObject, DiscardableJSON>()
     
     
-    init(cacheCountLimit: Int, cacheSizeLimit: Int) {
+    public init(cacheCountLimit: Int, cacheSizeLimit: Int) {
         
         imageCache.countLimit = cacheCountLimit
         dataCache.countLimit = cacheCountLimit
